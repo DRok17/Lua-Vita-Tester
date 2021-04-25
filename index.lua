@@ -1,9 +1,9 @@
 --[[
-Lua Vita Tester v1.0 by Keinta15            
+Lua Vita Tester v1.0 by Keinta15
 
 This is a fork of SMOKE5's VitaTester (https://github.com/SMOKE5/VitaTester) at no point am I claiming this as mine,
 this was just made to test myself that I could port it over to Lua Player Plus Vita for PS Vita made by: Rinnegatamante
-since I'm still learning and it was made as a fun learning experience. 
+since I'm still learning and it was made as a fun learning experience.
 ]]
 
 --\* Initiating Sound Device*/
@@ -15,7 +15,7 @@ yellow = Color.new(255,255,0,255)
 red = Color.new(255,0,0,255)
 
 --\*init images*/
-bg = Graphics.loadImage("app0:/resources/bg.png") 
+bg = Graphics.loadImage("app0:/resources/bg.png")
 crossimg = Graphics.loadImage("app0:/resources/cross.png")
 squareimg = Graphics.loadImage("app0:/resources/square.png")
 circleimg = Graphics.loadImage("app0:/resources/circle.png")
@@ -70,19 +70,19 @@ end
 while true do
         pad = Controls.read()
 	--\*init battery stats*/
-	battpercent = System.getBatteryPercentage() 
+	battpercent = System.getBatteryPercentage()
 	if System.isBatteryCharging() then
 		battcondition = "charging"
 	else
 		battcondition = "discharging"
 	end
-	
+
 	--\* init sticks/touch registration*/
 	rx,ry = Controls.readRightAnalog()
         lx,ly = Controls.readLeftAnalog()
 	tx1, ty1, tx2, ty2, tx3, ty3, tx4, ty4, tx5, ty5, tx6, ty6 = Controls.readTouch()
 	rtx1, rty1, rtx2, rty2, rtx4, rty4 = Controls.readRetroTouch()
-	
+
 	for i=1,2 do
 		if hsnd1[i] and not Sound.isPlaying(hsnd1[i]) then
 			Sound.close(hsnd1[i])
@@ -99,7 +99,7 @@ while true do
 
 	--\* Display info */
 	Font.print(font, 10, 10, "Lua Vita Tester v1.1 by Keinta15", white)
-	Font.print(font, 650, 0, "Press Start + Select to exit", white)
+	Font.print(font, 650, 0, "Press L + R to exit", white)
 	Font.print(font, 650, 20, "Press X and O for Sound Test", white)
 	Font.print(font, 770, 505, "Right: " .. rx .. ", " .. ry, white)
 	Font.print(font, 10, 505, "Left: " .. lx .. ", " .. ly, white)
@@ -156,15 +156,15 @@ while true do
         end
         --\* Draw left directional button if pressed */
 	if Controls.check(pad, left) then
-		--Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work 
+		--Graphics.drawRotateImage(65, 203, dpad, -1.57) couldn't make the intergers to work
 		Graphics.drawImage(25, 167, leftimg)
         end
         --\* Draw right directional button if pressed */
 	if Controls.check(pad, right) then
-		--Graphics.drawRotateImage(123, 203, dpad, 1.57) couldn't make the intergers to work 
+		--Graphics.drawRotateImage(123, 203, dpad, 1.57) couldn't make the intergers to work
 		Graphics.drawImage(83, 167, rightimg)
 	end
-	 
+
 	--\* Draw front touch on screen */
 	if tx1 ~= nil then
 		Graphics.drawImage(tx1- 50,ty1- 56.5, frontTouch)
@@ -208,10 +208,10 @@ while true do
 	end
 
 	--\* Controls to exit app */
-        if Controls.check(pad, start) and Controls.check(pad, select) then	
+        if Controls.check(pad, ltrigger) and Controls.check(pad, rtrigger) then	
 	    System.exit()
 	end
-	
+
 	--\*Terminating drawing phase*/
 	Screen.flip()
 	Graphics.termBlend()
